@@ -20,8 +20,13 @@ export default function Home() {
   */
   const [user, setUser] = useState({})
 
+
   const handleLoginButtonClick = async () => {
     try {
+      /*
+        Uses configuration from services/auth.js
+        to redirect user to host login page
+      */
       await Auth.federatedSignIn()
     } catch (error) {
       console.log("Cannot login:", error)
@@ -30,12 +35,19 @@ export default function Home() {
 
   const handleLogoutButtonClick = async () => {
     try {
+      /*
+        User logout
+      */
       await Auth.signOut()
     } catch (error) {
       console.log("Cannot log out:", error)
     }
   }
 
+  /*
+    Checks whether the user is logged in
+    if so, gets user data and puts into user state
+  */
   const init = async () => {
     try {
       const userData = await getUser()
@@ -61,6 +73,10 @@ export default function Home() {
     }
   }
 
+  /*
+    Check user object 
+    every time page rerenders
+  */
   useEffect(() => {
     init()
   }, [])
