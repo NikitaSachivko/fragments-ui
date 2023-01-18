@@ -1,7 +1,8 @@
 import Button from "../components/Button"
 import Title from "../components/Title"
-// import { Auth, getUser } from '../services/auth'
+import { Auth, getUser } from '../services/auth'
 import { useEffect, useState } from "react"
+
 
 export default function Home() {
   /*
@@ -11,7 +12,7 @@ export default function Home() {
     Default state will be true (disabled), because we need to wait for 
     user status first
   */
-  const [loginButtonStatus, setLoginButtonStatus] = useState(true)
+  const [loginButtonStatus, setLoginButtonStatus] = useState(false)
   const [logoutButtonStatus, setLogoutButtonStatus] = useState(true)
 
   /*
@@ -19,35 +20,56 @@ export default function Home() {
   */
   const [user, setUser] = useState({})
 
-  const handleLoginButtonClick = () => {
-    // Auth.federatedSignIn()
+  const handleLoginButtonClick = async () => {
+    try {
+      await Auth.federatedSignIn()
+    } catch (error) {
+      console.log("Cannot login:", error)
+    }
   }
 
-  const handleLogoutButtonClick = () => {
-    // Auth.signOut()
+  const handleLogoutButtonClick = async () => {
+    try {
+      await Auth.signOut()
+    } catch (error) {
+      console.log("Cannot log out:", error)
+    }
   }
 
-  /*
-    Function that will handle async user read,
-    it will control status of buttons and set user state
-  */
-  const getUserData = async () => {
-    // const userData = await getUser()
+  const init = async () => {
+    try {
+      const userData = await getUser()
+      if (!userData) {
+        /*
+          If user not logged, then disable
+          logout button, and set active for login button
+        */
+        setLoginButtonStatus(false)
+        setLogoutButtonStatus(true)
+      } else {
+        /*
+         After user logged we set button status and 
+         set user object to userData
+        */
+        setLoginButtonStatus(true)
+        setLogoutButtonStatus(false)
 
-    // if (!userData) {
-    //   setLoginButtonStatus(false)
-    //   setLogoutButtonStatus(true)
-    // }
+        setUser(userData)
+      }
+    } catch (error) {
+      console.log("Cannot read user data", error)
+    }
   }
 
   useEffect(() => {
-    getUserData()
-
+    init()
   }, [])
+
 
   return (
     <div className="App">
       <Title text={"Fragments UI"} />
+      <Title text={!!user ? user.username : ""} />
       <div className="grid grid-cols-2 w-[250px] gap-5 content-center">
         <Button disabled={loginButtonStatus} onClick={handleLoginButtonClick} text={"Login"} />
         <Button disabled={logoutButtonStatus} onClick={handleLogoutButtonClick} text={"Logout"} />
