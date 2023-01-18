@@ -1,7 +1,14 @@
 {
   "name": "fragments-ui",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
+  "description": "Fragments UI testing web app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nsachivko/fragments-ui.git"
+  },
+  "author": "Nikita Sachivko nsachivko@myseneca.ca",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
