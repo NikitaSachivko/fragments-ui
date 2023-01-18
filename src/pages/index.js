@@ -81,9 +81,8 @@ export default function Home() {
     init()
   }, [])
 
-
   return (
-    <div className="App">
+    <div className="">
       <Title text={"Fragments UI"} />
       <Title text={!!user ? user.username : ""} />
       <div className="grid grid-cols-2 w-[250px] gap-5 content-center">
