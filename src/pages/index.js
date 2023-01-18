@@ -2,7 +2,6 @@ import Button from "../components/Button"
 import Title from "../components/Title"
 // import { Auth, getUser } from '../services/auth'
 import { useEffect, useState } from "react"
-console.log(process.env)
 
 export default function Home() {
   /*
