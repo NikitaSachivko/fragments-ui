@@ -1,5 +1,6 @@
-# fragments UI
+ fragments UI
 
+```bash
 src/
 ├── components          -> Folder with custom components
 │   ├── Button.jsx  
@@ -13,4 +14,5 @@ src/
 ├── services     
 │   └── auth.js         -> File with Cognito config and Auth logic
 └── styles
-    └── globals.css       
+    └── globals.css   
+```
