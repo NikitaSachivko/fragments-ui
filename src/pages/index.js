@@ -2,7 +2,7 @@ import Button from "../components/Button"
 import Title from "../components/Title"
 import { Auth, getUser } from '../services/auth'
 import { useEffect, useState } from "react"
-
+import { getUserFragments } from './api/get-user-fragments'
 
 export default function Home() {
   /*
@@ -51,6 +51,10 @@ export default function Home() {
   const init = async () => {
     try {
       const userData = await getUser()
+
+      // Do an authenticated request to the fragments API server and log the result
+      getUserFragments(userData)
+
       if (!userData) {
         /*
           If user not logged, then disable
