@@ -71,6 +71,8 @@ export default function Home() {
         setLogoutButtonStatus(false)
 
         setUser(userData)
+
+        console.log(user)
       }
     } catch (error) {
       console.log("Cannot read user data", error)
@@ -86,12 +88,16 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="">
-      <Title text={"Fragments UI"} />
-      <Title text={!!user ? user.username : ""} />
-      <div className="grid grid-cols-2 w-[250px] gap-5 content-center">
-        <Button disabled={loginButtonStatus} onClick={handleLoginButtonClick} text={"Login"} />
-        <Button disabled={logoutButtonStatus} onClick={handleLogoutButtonClick} text={"Logout"} />
+    <div className="flex items-center justify-center h-screen">
+      <div className="grid grid-row-2 ">
+        <div>
+          <Title text={"Fragments UI"} />
+          <Title text={!!user ? user.username : ""} />
+        </div>
+        <div className="grid grid-cols-2 w-[250px] gap-5 content-center">
+          <Button disabled={loginButtonStatus} onClick={handleLoginButtonClick} text={"Login"} />
+          <Button disabled={logoutButtonStatus} onClick={handleLogoutButtonClick} text={"Logout"} />
+        </div>
       </div>
     </div>
   )
