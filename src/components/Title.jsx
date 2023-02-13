@@ -4,5 +4,4 @@ const Title = ({ text = "", textColor = "text-black" }) => {
 
 }
 
-
 export default Title
