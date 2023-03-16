@@ -19,7 +19,6 @@ export async function postUserFragment(user, contentType = "text/plain", text = 
             body: text
         })
 
-        console.log(res)
         if (!res.ok) {
             throw new Error(`${res.status} ${res.statusText}`)
         }
