@@ -1,5 +1,6 @@
 
 const Button = ({ disabled = false, text = "", onClick = () => { }, className = "" }) => {
+
     return (
         <button
             disabled={disabled}

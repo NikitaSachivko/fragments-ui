@@ -9,18 +9,23 @@ const apiUrl = process.env.API_URL || 'http://localhost:9000'
  * to have an `idToken` attached, so we can send that along with the request.
  */
 export async function getUserFragments(user) {
+  let data = {}
+
   console.log('Requesting user fragments data...')
   try {
-    const res = await fetch(`${apiUrl}/v1/fragments`, {
+    const res = await fetch(`${apiUrl}/v1/fragments?expand=1`, {
       // Generate headers with the proper Authorization bearer token to pass
       headers: user.authorizationHeaders(),
     })
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`)
     }
-    const data = await res.json()
+    data = await res.json()
+
     console.log('Got user fragments data', { data })
   } catch (err) {
     // console.error('Unable to call GET /v1/fragment', { err })
   }
+
+  return Promise.resolve(data)
 }
