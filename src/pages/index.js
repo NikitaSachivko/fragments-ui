@@ -188,16 +188,16 @@ export default function Home() {
                     onClick={handleFragmentCreate} text={"Create fragment"} />
                 </div>
               </div>
-              <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-[450px] h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-                <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                  <ul class="space-y-2">
+              <aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-[450px] h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+                <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                  <ul className="space-y-2">
                     {fragments?.map((fragment, index) => {
                       return (<li key={index}>
-                        <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div className="max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                           <a href="#">
-                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{fragment.id}</h5>
+                            <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{fragment.id}</h5>
                           </a>
-                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{fragment.type}</p>
+                          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{fragment.type}</p>
                         </div>
                       </li>)
                     })
