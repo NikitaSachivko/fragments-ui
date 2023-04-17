@@ -32,6 +32,10 @@ RUN npm run build
 CMD ["npm", "run", "start"]
 
 
+HEALTHCHECK --interval=15s --timeout=30s --start-period=10s --retries=3 \
+    CMD curl --fail localhost || exit 1
+
+
 
 
 

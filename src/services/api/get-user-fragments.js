@@ -1,7 +1,10 @@
 // src/api.js
 
+
 // fragments microservice API, defaults to localhost:9000
 const apiUrl = process.env.API_URL || 'http://localhost:9000'
+const { getUserFragmentData } = require('./get-user-fragment-data')
+const { getUserFragmentFormats } = require('./get.user-fragment-formats')
 
 /**
  * Given an authenticated user, request all fragments for this user from the
@@ -20,9 +23,19 @@ export async function getUserFragments(user) {
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`)
     }
+
     data = await res.json()
 
-    console.log('Got user fragments data', { data })
+    // console.log(data)
+    const fragmentsDataPromises = data.fragments.map(async (fragment) => {
+      fragment.fragmentData = await getUserFragmentData(user, fragment.id, fragment.type) || {}
+      fragment.formats = await getUserFragmentFormats(user, fragment.id) || []
+      return fragment
+    })
+
+    data = await Promise.all(fragmentsDataPromises)
+    console.log(data)
+
   } catch (err) {
     // console.error('Unable to call GET /v1/fragment', { err })
   }

@@ -1,10 +1,9 @@
-// src/api.js
 
 // fragments microservice API, defaults to localhost:9000
 const apiUrl = process.env.API_URL || 'http://localhost:9000'
 
 
-export async function postUserFragment(user, contentType = "text/plain", text = "") {
+export async function putUserFragment(user, id, text = "", contentType) {
     let data = {}
 
     if (text === "") {
@@ -13,16 +12,13 @@ export async function postUserFragment(user, contentType = "text/plain", text = 
 
     let headers = user.authorizationHeaders()
     headers["Content-Type"] = contentType
+
     try {
-        const res = await fetch(`${apiUrl}/v1/fragments`, {
-            method: 'POST',
+        const res = await fetch(`${apiUrl}/v1/fragments/${id}`, {
+            method: 'PUT',
             headers: headers,
             body: text
         })
-
-        if (!res.ok) {
-            throw new Error(`${res.status} ${res.statusText}`)
-        }
 
         data = await res.json()
     } catch (err) {
